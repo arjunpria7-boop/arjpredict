@@ -38,7 +38,7 @@ function showConfigurationError() {
   resultsContainer.classList.add('hidden');
   loader.classList.add('hidden');
 
-  errorMessageElement.innerHTML = `<strong>Error Konfigurasi:</strong> API Key tidak ditemukan. <br>Aplikasi ini memerlukan "build step" untuk menyuntikkan API Key agar dapat berfungsi saat di-hosting.`;
+  errorMessageElement.innerHTML = `<strong>Kunci API Diperlukan:</strong> Kunci API Google AI harus dikonfigurasi di lingkungan proyek Anda agar aplikasi ini dapat berfungsi.`;
   errorContainer.classList.remove('hidden');
 
   if(predictButton) {
