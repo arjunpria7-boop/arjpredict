@@ -5,17 +5,7 @@
 
 import { GoogleGenAI, Type } from '@google/genai';
 
-// IMPORTANT: This application reads the API_KEY from the environment.
-// For deployment on Netlify, you MUST set an environment variable named API_KEY
-// in your site's settings. You also need a build step to make this key
-// available to the browser-side code.
 const API_KEY = process.env.API_KEY;
-if (!API_KEY) {
-  // This error will appear in the browser console if the API key isn't injected during a build step.
-  throw new Error('API_KEY is not set. Configure it in your build environment.');
-}
-
-const ai = new GoogleGenAI({ apiKey: API_KEY });
 
 const predictButton = document.getElementById('predict-btn');
 const loader = document.getElementById('loader');
@@ -24,7 +14,6 @@ const errorContainer = document.getElementById('error-container');
 const errorMessageElement = document.getElementById('error-message');
 const marketSelect = document.getElementById('market-select');
 const marketDate = document.getElementById('market-date');
-
 
 const result2d = document.getElementById('result-2d');
 const result3d = document.getElementById('result-3d');
@@ -39,7 +28,28 @@ const inputElements = inputIds.map(
   (id) => document.getElementById(id)
 );
 
-async function handlePrediction() {
+
+function showConfigurationError() {
+  const allInputsAndButtons = document.querySelectorAll('input, select, button');
+  allInputsAndButtons.forEach(el => {
+    if (el) el.disabled = true;
+  });
+  
+  resultsContainer.classList.add('hidden');
+  loader.classList.add('hidden');
+
+  errorMessageElement.innerHTML = `<strong>Error Konfigurasi:</strong> API Key tidak ditemukan. <br>Aplikasi ini memerlukan "build step" untuk menyuntikkan API Key agar dapat berfungsi saat di-hosting.`;
+  errorContainer.classList.remove('hidden');
+
+  if(predictButton) {
+    predictButton.querySelector('.button-text').textContent = 'Tidak Terkonfigurasi';
+    predictButton.style.background = '#555';
+    predictButton.style.animation = 'none';
+    predictButton.style.cursor = 'not-allowed';
+  }
+}
+
+async function handlePrediction(ai) {
   // 1. UI Setup
   predictButton.disabled = true;
   predictButton.querySelector('.button-text').textContent = 'Mencari Angka Jitu...';
@@ -189,5 +199,15 @@ function resetButton() {
   predictButton.querySelector('.button-text').textContent = 'Prediksi Angka Jitu';
 }
 
+function main() {
+  if (!API_KEY) {
+    console.error('API_KEY is not set. This app requires a build step to inject environment variables.');
+    showConfigurationError();
+    return;
+  }
+  
+  const ai = new GoogleGenAI({ apiKey: API_KEY });
+  predictButton.addEventListener('click', () => handlePrediction(ai));
+}
 
-predictButton.addEventListener('click', handlePrediction);
+main();
