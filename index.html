@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prediksi ARJ</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script type="importmap">
       {
         "imports": {
@@ -32,7 +33,7 @@
               <option value="SINGAPORE">SINGAPORE</option>
               <option value="SYDNEY">SYDNEY</option>
             </select>
-            <p id="market-date" contenteditable="true">2 OKTOBER 2025</p>
+            <input type="text" id="market-date" value="2 OKTOBER 2025" />
         </div>
         <p>
           Masukkan 6 hasil togel 4 digit sebelumnya. ARJ akan menganalisis pola untuk memprediksi angka keluaran berikutnya.
@@ -41,6 +42,7 @@
       <main>
         <div class="input-section">
           <h2>Data Keluaran Terakhir</h2>
+          <p class="instructions">Isi 6 kolom di bawah dengan hasil 4-digit dari hari sebelumnya secara berurutan.</p>
           <div id="input-grid">
             <input type="text" id="day1" maxlength="4" value="8708" pattern="\d{4}" placeholder="Hari 1" />
             <input type="text" id="day2" maxlength="4" value="8259" pattern="\d{4}" placeholder="Hari 2" />
@@ -78,19 +80,19 @@
           </div>
           <div class="additional-results-grid">
             <div class="result-card">
-                <h3>CB</h3>
+                <h3>CB <i class="fas fa-info-circle" title="Colok Bebas: Menebak satu angka yang akan keluar di antara 4 angka hasil."></i></h3>
                 <p id="result-tunggal">--</p>
             </div>
             <div class="result-card">
-                <h3>BBFS</h3>
+                <h3>BBFS <i class="fas fa-info-circle" title="Bolak Balik Full Set: Kombinasi angka yang bisa dipasang bolak-balik untuk mendapatkan peluang 4D, 3D, dan 2D."></i></h3>
                 <p id="result-bbfs">--</p>
             </div>
              <div class="result-card">
-                <h3>BB 3D</h3>
+                <h3>BB 3D <i class="fas fa-info-circle" title="Bolak Balik 3D: Pilihan angka 3-digit untuk dipasang bolak-balik."></i></h3>
                 <p id="result-bb3d">--</p>
             </div>
              <div class="result-card">
-                <h3>BB 2D</h3>
+                <h3>BB 2D <i class="fas fa-info-circle" title="Bolak Balik 2D: Pilihan angka 2-digit untuk dipasang bolak-balik."></i></h3>
                 <p id="result-bb2d">--</p>
             </div>
           </div>
